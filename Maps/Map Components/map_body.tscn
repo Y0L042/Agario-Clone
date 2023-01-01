@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://m1bgfd3xpj1f"]
+
+[node name="Map Body" type="StaticBody2D"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cags74dvqkj7e"]
+
+[ext_resource type="PackedScene" uid="uid://m1bgfd3xpj1f" path="res://Maps/Map Components/map_body.tscn" id="1_knrr8"]
+[ext_resource type="PackedScene" uid="uid://5r6nhlxqoypt" path="res://Entity/entity.tscn" id="1_t1lqo"]
+
+[node name="White Map 1" type="Node2D"]
+
+[node name="Entity" parent="." instance=ExtResource("1_t1lqo")]
+position = Vector2(600, 176)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Map Body" parent="." instance=ExtResource("1_knrr8")]
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map Body"]
+build_mode = 1
+polygon = PackedVector2Array(1152, 0, 1152, 648, 0, 648, 0, 0)
+one_way_collision = true
+
+[editable path="Map Body"]
