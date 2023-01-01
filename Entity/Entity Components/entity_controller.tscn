@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv1bbqycpc35j"]
+
+[ext_resource type="Script" path="res://Entity/Entity Components/entity_controller.gd" id="1_b0qbc"]
+
+[node name="EntityController" type="Node"]
+script = ExtResource("1_b0qbc")

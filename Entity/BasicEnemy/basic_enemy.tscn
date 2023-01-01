@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://drp41aqt8fabb"]
+
+[ext_resource type="Texture2D" uid="uid://cy4thqeoim7do" path="res://Entity/Entity Components/clipart-circle-neon-green-17.png" id="1_yivc4"]
+[ext_resource type="PackedScene" uid="uid://bv1bbqycpc35j" path="res://Entity/Entity Components/entity_controller.tscn" id="2_infj3"]
+[ext_resource type="PackedScene" uid="uid://ds4ofa7afy580" path="res://Entity/Entity Components/movement_component.tscn" id="3_2svpk"]
+[ext_resource type="PackedScene" uid="uid://bnvbadjsylyvq" path="res://Entity/Entity Components/vision_component.tscn" id="4_84nmm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5y2by"]
+
+[node name="BasicEnemy" type="CharacterBody2D" groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5y2by")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("1_yivc4")
+
+[node name="EntityController" parent="." node_paths=PackedStringArray("_characterBody", "_movementComponent") instance=ExtResource("2_infj3")]
+_characterBody = NodePath("..")
+_movementComponent = NodePath("MovementComponent")
+
+[node name="MovementComponent" parent="EntityController" instance=ExtResource("3_2svpk")]
+
+[node name="VisionComponent" parent="." instance=ExtResource("4_84nmm")]
