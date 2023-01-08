@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwcs4mnvkksy8"]
+
+[ext_resource type="Texture2D" uid="uid://3d17yfmhgj65" path="res://Food/Food Components/circle-clipart-colored-13.png" id="1_rnlv6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jf371"]
+
+[node name="BasicFood" type="Node2D" groups=["Food"]]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+scale = Vector2(0.75, 0.75)
+shape = SubResource("CircleShape2D_jf371")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D"]
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("1_rnlv6")

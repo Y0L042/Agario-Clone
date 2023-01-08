@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi3bnvxxqx8li"]
+[gd_scene load_steps=4 format=3 uid="uid://bi3bnvxxqx8li"]
 
 [ext_resource type="PackedScene" uid="uid://m1bgfd3xpj1f" path="res://Maps/Map Components/map_body.tscn" id="1_knrr8"]
 [ext_resource type="PackedScene" uid="uid://b1ymykiue57r7" path="res://Entity/Player/player.tscn" id="1_t1lqo"]
+[ext_resource type="PackedScene" uid="uid://cwcs4mnvkksy8" path="res://Food/basic_food.tscn" id="3_putqd"]
 
 [node name="White Map 1" type="Node2D"]
 
@@ -12,6 +13,7 @@ position = Vector2(600, 176)
 anchor_mode = 0
 
 [node name="Map Body" parent="." instance=ExtResource("1_knrr8")]
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map Body"]
@@ -19,5 +21,79 @@ visible = false
 build_mode = 1
 polygon = PackedVector2Array(1152, 0, 1152, 648, 0, 648, 0, 0)
 one_way_collision = true
+
+[node name="Food" type="Marker2D" parent="."]
+
+[node name="BasicFood" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(424, 120)
+
+[node name="BasicFood2" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(376, 240)
+
+[node name="BasicFood3" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(528, 352)
+
+[node name="BasicFood4" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(528, 144)
+
+[node name="BasicFood5" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(456, 272)
+
+[node name="BasicFood6" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(256, 376)
+
+[node name="BasicFood7" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(216, 112)
+
+[node name="BasicFood8" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(168, 232)
+
+[node name="BasicFood9" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(320, 344)
+
+[node name="BasicFood10" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(320, 136)
+
+[node name="BasicFood11" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(248, 264)
+
+[node name="BasicFood12" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(48, 368)
+
+[node name="BasicFood13" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(864, 296)
+
+[node name="BasicFood14" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(816, 416)
+
+[node name="BasicFood15" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(968, 528)
+
+[node name="BasicFood16" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(968, 320)
+
+[node name="BasicFood17" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(896, 448)
+
+[node name="BasicFood18" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(696, 552)
+
+[node name="BasicFood19" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(368, 304)
+
+[node name="BasicFood20" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(320, 424)
+
+[node name="BasicFood21" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(472, 536)
+
+[node name="BasicFood22" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(472, 328)
+
+[node name="BasicFood23" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(400, 456)
+
+[node name="BasicFood24" parent="Food" instance=ExtResource("3_putqd")]
+position = Vector2(200, 560)
 
 [editable path="Map Body"]
