@@ -1,5 +1,6 @@
 extends Node
 
+class_name MovementComponent
 
 @export var _maxSpeed: float : set = SetMaxSpeed, get = GetMaxSpeed
 func SetMaxSpeed(newMaxSpeed: float) -> void:

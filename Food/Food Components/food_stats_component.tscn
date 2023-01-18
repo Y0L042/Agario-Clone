@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy4urfmmsgkye"]
+
+[ext_resource type="Script" path="res://Food/Food Components/basic_food_stats.gd" id="1_5gxxy"]
+
+[node name="FoodStatsComponent" type="Node"]
+script = ExtResource("1_5gxxy")

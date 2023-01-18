@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1ymykiue57r7"]
+[gd_scene load_steps=10 format=3 uid="uid://b1ymykiue57r7"]
 
+[ext_resource type="PackedScene" uid="uid://dgjflkxmduxwn" path="res://Entity/Entity Components/action_field_component.tscn" id="1_brjc2"]
 [ext_resource type="Texture2D" uid="uid://cy4thqeoim7do" path="res://Entity/Entity Components/clipart-circle-neon-green-17.png" id="1_xcdtj"]
 [ext_resource type="PackedScene" uid="uid://bv1bbqycpc35j" path="res://Entity/Entity Components/entity_controller.tscn" id="2_w6xg7"]
 [ext_resource type="PackedScene" uid="uid://ds4ofa7afy580" path="res://Entity/Entity Components/movement_component.tscn" id="3_aigt8"]
 [ext_resource type="PackedScene" path="res://Entity/Entity Components/player_logic.tscn" id="4_oh07v"]
+[ext_resource type="PackedScene" uid="uid://bs06linh2oegg" path="res://Entity/Entity Components/camera_component.tscn" id="5_3npvp"]
+[ext_resource type="PackedScene" uid="uid://c636wxfvchhjr" path="res://Entity/Entity Components/stats_component.tscn" id="5_245du"]
+[ext_resource type="PackedScene" uid="uid://b65dwefg680p0" path="res://Entity/Entity Components/action_controller.tscn" id="7_ihu1a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lecd7"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 7
+motion_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lecd7")
@@ -18,12 +23,41 @@ shape = SubResource("CircleShape2D_lecd7")
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("1_xcdtj")
 
-[node name="EntityController" parent="." node_paths=PackedStringArray("_characterBody", "_movementComponent", "_movementLogicComponent") instance=ExtResource("2_w6xg7")]
+[node name="ActionFieldComponent" parent="CollisionShape2D" instance=ExtResource("1_brjc2")]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CollisionShape2D/ActionFieldComponent"]
+scale = Vector2(1.25, 1.25)
+shape = SubResource("CircleShape2D_lecd7")
+debug_color = Color(0.815686, 0.00392157, 0.980392, 0.419608)
+
+[node name="CameraComponent" parent="." instance=ExtResource("5_3npvp")]
+current = true
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.05
+drag_top_margin = 0.05
+drag_right_margin = 0.05
+drag_bottom_margin = 0.05
+
+[node name="EntityController" parent="." node_paths=PackedStringArray("_characterBody", "_characterCollisionShape", "_movementComponent", "_movementLogicComponent", "_statsComponent") instance=ExtResource("2_w6xg7")]
 _characterBody = NodePath("..")
+_characterCollisionShape = NodePath("../CollisionShape2D")
 _movementComponent = NodePath("MovementComponent")
 _movementLogicComponent = NodePath("PlayerInput")
+_statsComponent = NodePath("../ActionController/EnityStats")
 
 [node name="MovementComponent" parent="EntityController" instance=ExtResource("3_aigt8")]
-_maxSpeed = 150.0
 
 [node name="PlayerInput" parent="EntityController" instance=ExtResource("4_oh07v")]
+
+[node name="ActionController" parent="." node_paths=PackedStringArray("_enitityRoot", "_characterBodyColShape", "_statsComponent", "_actionFieldComponent") instance=ExtResource("7_ihu1a")]
+_enitityRoot = NodePath("..")
+_characterBodyColShape = NodePath("../CollisionShape2D")
+_statsComponent = NodePath("EnityStats")
+_actionFieldComponent = NodePath("../CollisionShape2D/ActionFieldComponent")
+
+[node name="EnityStats" parent="ActionController" instance=ExtResource("5_245du")]
+InitialHealth = 5.0
+InitialSize = 5.0
+InitialSpeed = 150.0

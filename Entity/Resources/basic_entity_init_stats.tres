@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b25kybmsrt1it"]
+
+[ext_resource type="Script" path="res://Entity/Resources/entity_initial_stats.gd" id="1_guspt"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_guspt")
+InitialHealth = 5.0
+InitialSize = 5.0
+InitialSpeed = 150.0
