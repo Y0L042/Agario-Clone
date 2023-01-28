@@ -11,7 +11,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lecd7"]
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Entity", "Player"]]
 collision_layer = 2
 collision_mask = 7
 motion_mode = 1
@@ -32,6 +32,7 @@ debug_color = Color(0.815686, 0.00392157, 0.980392, 0.419608)
 
 [node name="CameraComponent" parent="." instance=ExtResource("5_3npvp")]
 current = true
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -45,7 +46,7 @@ _characterBody = NodePath("..")
 _characterCollisionShape = NodePath("../CollisionShape2D")
 _movementComponent = NodePath("MovementComponent")
 _movementLogicComponent = NodePath("PlayerInput")
-_statsComponent = NodePath("../ActionController/EnityStats")
+_statsComponent = NodePath("../ActionController/EntityStats")
 
 [node name="MovementComponent" parent="EntityController" instance=ExtResource("3_aigt8")]
 
@@ -54,10 +55,10 @@ _statsComponent = NodePath("../ActionController/EnityStats")
 [node name="ActionController" parent="." node_paths=PackedStringArray("_enitityRoot", "_characterBodyColShape", "_statsComponent", "_actionFieldComponent") instance=ExtResource("7_ihu1a")]
 _enitityRoot = NodePath("..")
 _characterBodyColShape = NodePath("../CollisionShape2D")
-_statsComponent = NodePath("EnityStats")
+_statsComponent = NodePath("EntityStats")
 _actionFieldComponent = NodePath("../CollisionShape2D/ActionFieldComponent")
 
-[node name="EnityStats" parent="ActionController" instance=ExtResource("5_245du")]
-InitialHealth = 5.0
-InitialSize = 5.0
-InitialSpeed = 150.0
+[node name="EntityStats" parent="ActionController" instance=ExtResource("5_245du")]
+_health = 1.0
+_size = 1.0
+_speed = 150.0

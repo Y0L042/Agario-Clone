@@ -23,4 +23,4 @@ scale = Vector2(0.01, 0.01)
 texture = ExtResource("1_rnlv6")
 
 [node name="FoodStatsComponent" parent="." instance=ExtResource("3_s2dco")]
-InitialFoodValue = 1.0
+FoodValue = 1.0

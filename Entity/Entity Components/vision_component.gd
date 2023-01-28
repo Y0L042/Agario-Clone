@@ -15,10 +15,9 @@ func _on_body_exited(body: Node2D) -> void:
 	if is_instance_valid(body):
 		VisionBodyEntities.erase(body)
 
-func GetEntitiesInGroup(groups: Array[String]) -> Array[Node2D]:
+func GetEnemyEntities() -> Array[Node2D]:
 	var entitiesInGroup: Array[Node2D]
 	for entity in VisionBodyEntities:
-		for group in groups:
-			if entity.is_in_group(group):
-				entitiesInGroup.append(entity)
+		if entity.is_in_group("Entity"):
+			entitiesInGroup.append(entity)
 	return entitiesInGroup

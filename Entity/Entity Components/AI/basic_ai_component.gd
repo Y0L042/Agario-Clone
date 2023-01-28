@@ -1,16 +1,36 @@
 extends Node
 
 
-var MovementDirection: Vector2
 
-@export var _vision: Area2D
-@export var _enemyGroups: Array[String] : set = SetEnemyGroups, get = GetEnemyGroups
-func SetEnemyGroups(enemyGroups: Array[String]) -> void:
-	_enemyGroups = enemyGroups
-func GetEnemyGroups() -> Array[String]:
-	return _enemyGroups
+
+@export var _visionComponent: Area2D
+@export var _npcEntitiy: Node2D
+
+var _movementDirection: Vector2 = Vector2.ZERO : set = SetMovementDirection, get = GetMovementDirection
+func SetMovementDirection(movementDirection) -> void:
+	_movementDirection = movementDirection
+func GetMovementDirection() -> Vector2:
+	return _movementDirection
+
+
 
 var _enemyEntities: Array[Node2D]
 
+
+
+
 func _physics_process(delta: float) -> void:
-	_enemyEntities = _vision.GetEntitiesInGroup(_enemyGroups)
+	if is_instance_valid(_visionComponent):
+		_enemyEntities = _visionComponent.GetEnemyEntities()
+
+	ChaseEnemy()
+
+
+
+func ChaseEnemy() -> void:
+	if !is_instance_valid(_npcEntitiy): return
+	if _enemyEntities.is_empty(): return
+
+	var chaseDirection: Vector2 = _npcEntitiy.get_global_position().direction_to(_enemyEntities[0].get_global_position())
+
+	SetMovementDirection(chaseDirection)

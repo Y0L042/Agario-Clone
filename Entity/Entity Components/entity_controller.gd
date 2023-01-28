@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 
 func MoveEntity() -> void:
 	if _movementComponent and _movementLogicComponent and _characterBody:
-		var direction: Vector2 = _movementLogicComponent.MovementDirection
+		var direction: Vector2 = _movementLogicComponent.GetMovementDirection()
 		_movementComponent.MoveInDirection(direction, _characterBody)
 
 

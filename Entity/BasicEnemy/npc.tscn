@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://cfjh3r28bs67q"]
+
+[ext_resource type="Texture2D" uid="uid://cy4thqeoim7do" path="res://Entity/Entity Components/clipart-circle-neon-green-17.png" id="1_283js"]
+[ext_resource type="PackedScene" uid="uid://dgjflkxmduxwn" path="res://Entity/Entity Components/action_field_component.tscn" id="2_umtkf"]
+[ext_resource type="PackedScene" uid="uid://bnvbadjsylyvq" path="res://Entity/Entity Components/vision_component.tscn" id="3_2qmfs"]
+[ext_resource type="PackedScene" uid="uid://bv1bbqycpc35j" path="res://Entity/Entity Components/entity_controller.tscn" id="3_lnefw"]
+[ext_resource type="PackedScene" uid="uid://ds4ofa7afy580" path="res://Entity/Entity Components/movement_component.tscn" id="4_rdu75"]
+[ext_resource type="PackedScene" uid="uid://bj7h35rtkql6j" path="res://Entity/Entity Components/AI/basic_ai_component.tscn" id="5_4aqwh"]
+[ext_resource type="PackedScene" uid="uid://b65dwefg680p0" path="res://Entity/Entity Components/action_controller.tscn" id="6_oh2t5"]
+[ext_resource type="PackedScene" uid="uid://c636wxfvchhjr" path="res://Entity/Entity Components/stats_component.tscn" id="7_wd633"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ul17y"]
+
+[node name="NPC" type="CharacterBody2D" groups=["Entity", "NPC"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ul17y")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("1_283js")
+
+[node name="ActionFieldComponent" parent="CollisionShape2D" instance=ExtResource("2_umtkf")]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CollisionShape2D/ActionFieldComponent"]
+scale = Vector2(1.25, 1.25)
+shape = SubResource("CircleShape2D_ul17y")
+debug_color = Color(0.815686, 0.00392157, 0.980392, 0.419608)
+
+[node name="VisionComponent" parent="CollisionShape2D" instance=ExtResource("3_2qmfs")]
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="CollisionShape2D/VisionComponent"]
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_ul17y")
+debug_color = Color(0.815686, 0.00392157, 0.980392, 0.419608)
+
+[node name="EntityController" parent="." node_paths=PackedStringArray("_characterBody", "_characterCollisionShape", "_movementComponent", "_movementLogicComponent", "_statsComponent") instance=ExtResource("3_lnefw")]
+_characterBody = NodePath("..")
+_characterCollisionShape = NodePath("../CollisionShape2D")
+_movementComponent = NodePath("MovementComponent")
+_movementLogicComponent = NodePath("BasicAIComponent")
+_statsComponent = NodePath("../ActionController/EntityStats")
+
+[node name="MovementComponent" parent="EntityController" instance=ExtResource("4_rdu75")]
+
+[node name="BasicAIComponent" parent="EntityController" node_paths=PackedStringArray("_visionComponent", "_npcEntitiy") instance=ExtResource("5_4aqwh")]
+_visionComponent = NodePath("../../CollisionShape2D/VisionComponent")
+_npcEntitiy = NodePath("../..")
+
+[node name="ActionController" parent="." node_paths=PackedStringArray("_enitityRoot", "_characterBodyColShape", "_statsComponent", "_actionFieldComponent") instance=ExtResource("6_oh2t5")]
+_enitityRoot = NodePath("..")
+_characterBodyColShape = NodePath("../CollisionShape2D")
+_statsComponent = NodePath("EntityStats")
+_actionFieldComponent = NodePath("../CollisionShape2D/ActionFieldComponent")
+
+[node name="EntityStats" parent="ActionController" instance=ExtResource("7_wd633")]
+_health = 1.0
+_size = 1.0
+_speed = 100.0

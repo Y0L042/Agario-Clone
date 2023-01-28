@@ -10,7 +10,9 @@ func _ready() -> void:
 		_actionFieldComponent.FoodAction.connect(EatFood)
 
 func EatFood(foodItem: Food) -> void:
-	var foodValue: int = foodItem.EatFood()
+	if !is_instance_valid(foodItem):
+		return
+	var foodValue: float = foodItem.EatFood()
 	if is_instance_valid(_statsComponent):
 		_statsComponent.Grow(foodValue)
 
